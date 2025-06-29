@@ -179,7 +179,7 @@ body {
   .container {
     flex-direction: column;
     padding: 90px 20px 60px 20px;
-    gap: 0;
+    gap: 40px;
   }
 
   .logo {
@@ -205,6 +205,7 @@ body {
     flex-direction: column;
     gap: 16px;
   }
+
   .about__info-title {
     flex-basis: 0;
   }
