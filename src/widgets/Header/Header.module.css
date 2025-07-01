@@ -1,0 +1,24 @@
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 20px 40px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
