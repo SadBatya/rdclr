@@ -1,9 +1,9 @@
 import "./index.css";
-import { App } from "./pages/Home/App";
+import { Home } from "./pages/Home/Home";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import ReactDOM from "react-dom/client";
 import { Layout } from "./pages/Layout/Layout";
-import { BookDetail } from "./pages/Book/BookDetail";
+import { BookDetail } from "./pages/BookDetail/BookDetail";
 import { Favorites } from "./pages/Favorites/Favorites";
 
 const router = createBrowserRouter([
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <App />,
+        element: <Home />,
       },
       {
         path: "favorites",
