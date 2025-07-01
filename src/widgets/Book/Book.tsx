@@ -1,6 +1,7 @@
 import { Button } from "@/shared/ui/Button/Button";
 import style from "./Book.module.css";
 import { Link } from "react-router";
+import { getYear } from "@/shared/utils/geyYear";
 
 interface Props {
   id: string;
@@ -17,7 +18,7 @@ export const Book = ({ id, img, title, date, rating, language }: Props) => (
     <div className={style.info}>
       <h3 className={style.title}>{title}</h3>
       <div className={style.subInfo}>
-        <span>{date}</span>
+        <span>{getYear(date)} г.</span>
         <span>{rating}</span>
         <span>{language}</span>
       </div>
