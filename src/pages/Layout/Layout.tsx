@@ -1,9 +1,12 @@
-import { Header } from "../../widgets/Header/Header";
+import { Header } from "@/widgets";
 import { Outlet } from "react-router";
+import style from "./Layout.module.css";
 
 export const Layout = () => (
   <>
     <Header />
-    <Outlet />
+    <div className={style.container}>
+      <Outlet />
+    </div>
   </>
 );
