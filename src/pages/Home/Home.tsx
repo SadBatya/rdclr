@@ -21,15 +21,7 @@ export default function Home() {
     <div className={style.app}>
       <div className={style.list}>
         {books.map((book) => (
-          <Book
-            key={book.id}
-            id={book.id}
-            img={book.volumeInfo.imageLinks?.thumbnail || ""}
-            title={book.volumeInfo.title || ""}
-            date={book.volumeInfo.publishedDate || ""}
-            rating={book.volumeInfo.averageRating || 0}
-            language={book.volumeInfo.language || ""}
-          />
+          <Book key={book.id} book={book} />
         ))}
       </div>
     </div>

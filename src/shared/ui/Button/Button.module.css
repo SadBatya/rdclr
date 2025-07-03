@@ -13,3 +13,11 @@
 .button:hover {
   background-color: black;
 }
+
+.active {
+  background-color: rgb(0, 94, 9);
+}
+
+.button.active:hover {
+  background-color: rgb(162, 1, 1);
+}

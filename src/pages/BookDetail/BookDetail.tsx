@@ -5,10 +5,18 @@ import { useEffect, useState } from "react";
 import { type IBook } from "@/shared/types/books";
 import { getYear } from "@/shared/utils/geyYear";
 import { getCurrentBook } from "@/shared/api/get-current-book";
+import { internalPath } from "@/shared/routes/path";
+import { CustomLink } from "@/shared/ui/CustomLink/CustomLink";
+import { useLocalStorage } from "@/shared/hooks/useLocaleStorage";
 
 export default function BookDetail() {
   const { id } = useParams();
   const [book, setBook] = useState<IBook | null>(null);
+
+  const { isFavorite, addToFavorites, removeFromFavorites } = useLocalStorage(
+    "favorites",
+    []
+  );
 
   useEffect(() => {
     if (!id) return;
@@ -25,29 +33,42 @@ export default function BookDetail() {
     fetchBook();
   }, [id]);
 
-  if (!book) return <div>Книга не найдена</div>;
+  const toggleFavorite = () => {
+    if (isFavorite(book?.id || "")) {
+      removeFromFavorites(book?.id || "");
+    } else {
+      addToFavorites(book!);
+    }
+  };
 
   return (
     <div className={style.container}>
       <img
         className={style.img}
-        src={book.volumeInfo.imageLinks?.thumbnail || ""}
-        alt={book.volumeInfo.title}
+        src={book?.volumeInfo.imageLinks?.thumbnail || ""}
+        alt={book?.volumeInfo.title}
       />
       <div className={style.info}>
-        <Button className={style.button__nav} onClick={() => {}}>
+        <CustomLink to={internalPath.home} className={style.button__nav}>
           Назад
-        </Button>
-        <h3 className={style.title}>{book.volumeInfo.title}</h3>
+        </CustomLink>
+        <h3 className={style.title}>{book?.volumeInfo.title}</h3>
         <div className={style.subinfo}>
-          <span>{getYear(book.volumeInfo.publishedDate || "")} г</span>
-          <span>{book.volumeInfo.averageRating ?? "Нет оценки"}</span>
-          <span>{book.volumeInfo.language?.toUpperCase()}</span>
+          <span>{getYear(book?.volumeInfo.publishedDate || "")} г</span>
+          <span>{book?.volumeInfo.averageRating ?? "Нет оценки"}</span>
+          <span>{book?.volumeInfo.language?.toUpperCase()}</span>
         </div>
-        <Button className={style.button} onClick={() => {}}>
-          Добавить в избранное
+        <Button
+          className={style.button}
+          onClick={() => {
+            toggleFavorite();
+          }}
+        >
+          {isFavorite(book?.id || "")
+            ? "Удалить из избранного"
+            : "Добавить в избранное"}
         </Button>
-        <p className={style.description}>{book.volumeInfo.description}</p>
+        <p className={style.description}>{book?.volumeInfo.description}</p>
       </div>
     </div>
   );
