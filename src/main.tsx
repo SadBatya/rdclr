@@ -1,10 +1,15 @@
 import "./index.css";
-import { Home } from "./pages/Home/Home";
+
 import { createBrowserRouter, RouterProvider } from "react-router";
 import ReactDOM from "react-dom/client";
-import { Layout } from "./pages/Layout/Layout";
-import { BookDetail } from "./pages/BookDetail/BookDetail";
-import { Favorites } from "./pages/Favorites/Favorites";
+
+import { Loading } from "./shared/ui/Loading/Loading";
+import { Suspense, lazy } from "react";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const BookDetail = lazy(() => import("./pages/BookDetail/BookDetail"));
+const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
+const Layout = lazy(() => import("./pages/Layout/Layout"));
 
 const router = createBrowserRouter([
   {
@@ -13,15 +18,27 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "favorites",
-        element: <Favorites />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Favorites />
+          </Suspense>
+        ),
       },
       {
         path: "book/:id",
-        element: <BookDetail />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <BookDetail />
+          </Suspense>
+        ),
       },
     ],
   },

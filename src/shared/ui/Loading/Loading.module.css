@@ -1,3 +1,11 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 71px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loading {
   display: flex;
   gap: 10px;

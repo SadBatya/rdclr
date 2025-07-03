@@ -1,1 +1,3 @@
-export const Favorites = () => <div>Избранное</div>;
+export default function Favorites() {
+  return <div>Избранное</div>;
+}

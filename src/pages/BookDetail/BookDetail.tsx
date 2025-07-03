@@ -6,10 +6,9 @@ import { type IBook } from "@/shared/types/books";
 import { getYear } from "@/shared/utils/geyYear";
 import { getCurrentBook } from "@/shared/api/get-current-book";
 
-export const BookDetail = () => {
+export default function BookDetail() {
   const { id } = useParams();
   const [book, setBook] = useState<IBook | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!id) return;
@@ -20,15 +19,12 @@ export const BookDetail = () => {
         setBook(data);
       } catch (error) {
         console.error("Ошибка загрузки книги:", error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     fetchBook();
   }, [id]);
 
-  if (isLoading) return <div>Загрузка...</div>;
   if (!book) return <div>Книга не найдена</div>;
 
   return (
@@ -55,4 +51,4 @@ export const BookDetail = () => {
       </div>
     </div>
   );
-};
+}
