@@ -4,6 +4,7 @@ import { getBooks } from "@/shared/api/get-books";
 import { Book } from "@/widgets/Book/Book";
 import { useEffect, useState } from "react";
 import { type IBook } from "@/shared/types/books";
+import { Loading } from "@/shared/ui/Loading/Loading";
 
 export const Home = () => {
   const [books, setBooks] = useState<IBook[]>([]);
@@ -19,6 +20,7 @@ export const Home = () => {
 
   return (
     <div className={style.app}>
+      <Loading />
       <div className={style.list}>
         {books.map((book) => (
           <Book
