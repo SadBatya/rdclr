@@ -5,6 +5,8 @@ import ReactDOM from "react-dom/client";
 
 import { Loading } from "./shared/ui/Loading/Loading";
 import { Suspense, lazy } from "react";
+import { store } from "@/shared/store/store";
+import { Provider } from "react-redux";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const BookDetail = lazy(() => import("./pages/BookDetail/BookDetail"));
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root!).render(
-  <>
+  <Provider store={store}>
     <RouterProvider router={router} />
-  </>
+  </Provider>
 );
