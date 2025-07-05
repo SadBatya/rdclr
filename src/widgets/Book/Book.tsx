@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { getYear } from "@/shared/utils/geyYear";
 import { useLocalStorage } from "@/shared/hooks/useLocaleStorage";
 import type { IBook } from "@/shared/types/books";
+import { spliceTitle } from "@/shared/utils/spliceTitle";
 
 interface Props {
   book: IBook;
@@ -33,7 +34,7 @@ export const Book = ({ book }: Props) => {
         alt=""
       />
       <div className={style.info}>
-        <h3 className={style.title}>{book.volumeInfo.title}</h3>
+        <h3 className={style.title}>{spliceTitle(book.volumeInfo.title)}</h3>
         <div className={style.subInfo}>
           <span>{getYear(book.volumeInfo.publishedDate || "")} г.</span>
           <span>{book.volumeInfo.averageRating}</span>
