@@ -27,7 +27,21 @@ export const booksApi = createApi({
         },
       }),
     }),
+    getBookByName: builder.query<GoogleBooksResponse, string>({
+      query: (name) => ({
+        url: "",
+        params: {
+          q: name,
+          key: import.meta.env.VITE_GOOGLE_API_KEY,
+          maxResults: 10,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useGetBooksQuery, useGetCurrentBookQuery } = booksApi;
+export const {
+  useGetBooksQuery,
+  useGetCurrentBookQuery,
+  useGetBookByNameQuery,
+} = booksApi;
