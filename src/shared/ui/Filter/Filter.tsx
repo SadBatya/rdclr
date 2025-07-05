@@ -1,5 +1,4 @@
-import { Input } from "@/shared/ui/Input/Input";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import style from "./Filter.module.css";
 import clsx from "clsx";
 import { useClickOutside } from "@/shared/hooks/useClickOutside";
@@ -9,12 +8,12 @@ export const Filter = () => {
   const [inputValue, setInputValue] = useState("");
   const [activeMenu, setActiveMenu] = useState(false);
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  useClickOutside(ref, () => setActiveMenu(false));
+  const dropdownRef = useClickOutside<HTMLDivElement>(() => {
+    setActiveMenu(false);
+  });
 
   return (
-    <div ref={ref} className={style.filter}>
+    <div ref={dropdownRef} className={style.filter}>
       <div
         className={clsx(style.input, { [style.actve]: activeMenu })}
         onClick={() => setActiveMenu(!activeMenu)}
