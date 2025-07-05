@@ -2,18 +2,46 @@
 import style from "./Home.module.css";
 import { Book } from "@/widgets/Book/Book";
 import { Input } from "@/shared/ui/Input/Input";
-import { useGetBooksQuery } from "@/shared/api/books";
 import { useDebounce } from "@/shared/hooks/useDebounce";
-import { useGetBookByNameQuery } from "@/shared/api/books";
-import { useState } from "react";
+import {
+  useGetBookByNameQuery,
+  useGetInfiniteBooksQuery,
+} from "@/shared/api/books";
+import { useEffect, useState } from "react";
+import { Loading } from "@/shared/ui/Loading/Loading";
 
 export default function Home() {
   const [searhValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searhValue, 500);
-  const { data } = useGetBooksQuery("books");
+
   const { data: bookByName, isError } = useGetBookByNameQuery(debouncedValue, {
     skip: !debouncedValue,
   });
+
+  const {
+    data: infiniteBooks,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useGetInfiniteBooksQuery("books");
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 300 &&
+      hasNextPage &&
+      !isFetchingNextPage
+    ) {
+      fetchNextPage();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasNextPage, isFetchingNextPage]);
+
+  const books = infiniteBooks?.pages.flatMap((page) => page.items || []) ?? [];
 
   return (
     <div className={style.app}>
@@ -34,7 +62,8 @@ export default function Home() {
         )}
         {bookByName && bookByName?.items?.length > 0
           ? bookByName?.items?.map((book) => <Book key={book.id} book={book} />)
-          : data?.items?.map((book) => <Book key={book.id} book={book} />)}
+          : books?.map((book) => <Book key={book.id} book={book} />)}
+        {isLoading && <Loading />}
       </div>
     </div>
   );

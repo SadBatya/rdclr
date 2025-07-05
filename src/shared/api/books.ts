@@ -37,6 +37,28 @@ export const booksApi = createApi({
         },
       }),
     }),
+    getInfiniteBooks: builder.infiniteQuery<
+      GoogleBooksResponse,
+      string,
+      number
+    >({
+      infiniteQueryOptions: {
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+          if (!lastPage.items || lastPage.items.length < 10) return undefined;
+          return lastPageParam + 10;
+        },
+      },
+      query: ({ queryArg, pageParam }) => ({
+        url: "",
+        params: {
+          q: queryArg,
+          key: import.meta.env.VITE_GOOGLE_API_KEY,
+          maxResults: 10,
+          startIndex: pageParam,
+        },
+      }),
+    }),
   }),
 });
 
@@ -45,3 +67,6 @@ export const {
   useGetCurrentBookQuery,
   useGetBookByNameQuery,
 } = booksApi;
+
+export const useGetInfiniteBooksQuery =
+  booksApi.endpoints.getInfiniteBooks.useInfiniteQuery;
