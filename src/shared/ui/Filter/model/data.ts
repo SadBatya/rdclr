@@ -1,22 +1,25 @@
-export const filterData = [
+import { type IFilterValue, type ITitle } from "@/shared/types/filter";
+
+interface IFilterData {
+  title: ITitle;
+  filterValue: IFilterValue;
+}
+
+export const filterData: IFilterData[] = [
   {
     title: "Бесплатные книги",
-    value: "free",
+    filterValue: "free-ebooks",
   },
   {
-    title: "Доступные для просмотра",
-    value: "available",
-  },
-  {
-    title: "Демо доступ",
-    value: "demo",
+    title: "Полные книги",
+    filterValue: "full",
   },
   {
     title: "Платные книги",
-    value: "paid",
+    filterValue: "paid-ebooks",
   },
   {
-    title: "книги Google",
-    value: "google",
+    title: "Книги Google",
+    filterValue: "ebooks",
   },
 ];

@@ -39,7 +39,7 @@ export const booksApi = createApi({
     }),
     getInfiniteBooks: builder.infiniteQuery<
       GoogleBooksResponse,
-      string,
+      { query: string; filter?: string },
       number
     >({
       infiniteQueryOptions: {
@@ -49,15 +49,25 @@ export const booksApi = createApi({
           return lastPageParam + 10;
         },
       },
-      query: ({ queryArg, pageParam }) => ({
-        url: "",
-        params: {
-          q: queryArg,
+      query: ({ queryArg, pageParam }) => {
+        const { query, filter } = queryArg;
+
+        const params: Record<string, string | number> = {
+          q: query,
           key: import.meta.env.VITE_GOOGLE_API_KEY,
           maxResults: 10,
           startIndex: pageParam,
-        },
-      }),
+        };
+
+        if (filter?.trim()) {
+          params.filter = filter;
+        }
+
+        return {
+          url: "",
+          params,
+        };
+      },
     }),
   }),
 });

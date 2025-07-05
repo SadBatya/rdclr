@@ -9,11 +9,17 @@ import {
 } from "@/shared/api/books";
 import { useEffect, useState } from "react";
 import { Loading } from "@/shared/ui/Loading/Loading";
-import { Filter } from "@/shared/ui/filter/Filter";
+import { Filter } from "@/shared/ui/Filter/Filter";
+import { useSelector } from "react-redux";
+import { type RootState } from "@/shared/store/store";
 
 export default function Home() {
   const [searhValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searhValue, 500);
+
+  const filterValue = useSelector(
+    (state: RootState) => state.filter.filterValue
+  );
 
   const { data: bookByName, isError } = useGetBookByNameQuery(debouncedValue, {
     skip: !debouncedValue,
@@ -25,7 +31,12 @@ export default function Home() {
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-  } = useGetInfiniteBooksQuery("books");
+  } = useGetInfiniteBooksQuery({
+    query: "books",
+    filter: filterValue,
+  });
+
+  console.log(filterValue, "filter value");
 
   const handleScroll = () => {
     if (
