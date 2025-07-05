@@ -1,0 +1,58 @@
+.filter {
+  max-width: 300px;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.input {
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.input.actve::after {
+  transform: rotate(180deg);
+}
+
+.input:after {
+  content: "\25BC";
+  position: absolute;
+  right: 10px;
+}
+
+.menu {
+  max-width: 300px;
+  width: 100%;
+  position: absolute;
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px;
+  list-style: none;
+  color: black;
+  z-index: 1;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+
+.menu.active {
+  transform: translateY(10px);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.menu__item {
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.3s;
+  border-radius: 10px;
+}
+
+.menu__item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

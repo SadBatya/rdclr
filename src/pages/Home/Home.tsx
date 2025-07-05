@@ -9,6 +9,7 @@ import {
 } from "@/shared/api/books";
 import { useEffect, useState } from "react";
 import { Loading } from "@/shared/ui/Loading/Loading";
+import { Filter } from "@/shared/ui/filter/Filter";
 
 export default function Home() {
   const [searhValue, setSearchValue] = useState<string>("");
@@ -49,6 +50,7 @@ export default function Home() {
         placeholder="Поиск..."
         onChange={(e) => setSearchValue(e.target.value)}
       />
+      <Filter />
       <div className={style.list}>
         {bookByName?.items?.length === 0 && (
           <p className={style.message}>Ничего не найдено :(</p>
