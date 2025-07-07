@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# 📚 Домашние задания
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📝 Домашнее задание №1 — HTML + CSS
 
-Currently, two official plugins are available:
+🔗 [Демо проекта](https://sadbatya.github.io/rdclr/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🚀 Как запустить
 
-## Expanding the ESLint configuration
+- Откройте проект через расширение **Live Server** в вашей IDE (например, VS Code)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🧩 Особенности
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Использована методология **БЭМ**
+- DOM-элементы выбирались двумя способами:
+  - через **классы** (по БЭМ)
+  - через **теги**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚛️ Домашнее задание №2 — React + TypeScript
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+🔗 [Демо проекта](https://rdclr.vercel.app/)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🧱 Стек
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React
+- TypeScript
+- Vite
+- Redux Toolkit
+- React Router
+- React Query
+- CSS Modules
+
+### 🚀 Установка и запуск
+
+1. Установите зависимости:
+
+   ```bash
+   npm install
+   ```
+
+2. Добавьте свой **API ключ** для Google Books API в `.env` файл:
+
+   ```env
+   VITE_GOOGLE_API_KEY=your_api_key_here
+   ```
+
+3. Запуск проекта в режиме разработки:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Сборка проекта для продакшн:
+   ```bash
+   npm run build
+   ```
+
+---
+
+### 🧩 Особенности проекта
+
+- Архитектура проекта построена по принципам **FSD (Feature-Sliced Design)**
+- Роутинг вынесен в файл:
+  ```
+  shared/routes/path.ts
+  ```
+  для централизованного управления маршрутами
+- Работа с API и фильтрами реализована через **Redux Toolkit**
+- Используются **CSS-модули** для изолированной стилизации компонентов
+
+---
+
+### 🛠️ Кастомные хуки
+
+- `useDebounce` — устраняет лишние запросы при вводе текста в поиске
+- `useLocalStorage` — удобная работа с localStorage
+- `useClickOutside` — обработка кликов вне элемента (например, для закрытия попапов)
+
+---
+
+### 👨‍💻 Автор
+
+[Владимир Скрипник](https://github.com/sadbatya)

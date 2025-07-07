@@ -8,9 +8,11 @@ export default function Favorites() {
 
   return (
     <div className={style.list}>
-      {favorites.map((book: IBook) => (
-        <Book key={book.id} book={book} />
-      ))}
+      {favorites.length > 0 ? (
+        favorites.map((book: IBook) => <Book key={book.id} book={book} />)
+      ) : (
+        <p className={style.empty}>В избранном пока нет книг</p>
+      )}
     </div>
   );
 }

@@ -24,8 +24,6 @@ export default function BookDetail() {
     }
   };
 
-  console.log(book, "book");
-
   return (
     <div className={style.container}>
       <img
