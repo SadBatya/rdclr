@@ -44,7 +44,7 @@ export const booksApi = createApi({
     >({
       infiniteQueryOptions: {
         initialPageParam: 0,
-        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+        getNextPageParam: (lastPage, _, lastPageParam) => {
           if (!lastPage.items || lastPage.items.length < 10) return undefined;
           return lastPageParam + 10;
         },
