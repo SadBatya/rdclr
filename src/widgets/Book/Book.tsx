@@ -5,6 +5,7 @@ import { getYear } from "@/shared/utils/geyYear";
 import { useLocalStorage } from "@/shared/hooks/useLocaleStorage";
 import type { IBook } from "@/shared/types/books";
 import { spliceTitle } from "@/shared/utils/spliceTitle";
+import { toast } from "react-toastify";
 
 interface Props {
   book: IBook;
@@ -19,8 +20,10 @@ export const Book = ({ book }: Props) => {
   const toggleFavorite = () => {
     if (isFavorite(book?.id || "")) {
       removeFromFavorites(book?.id || "");
+      toast.error("Книга удалена из избранного");
     } else {
       addToFavorites(book!);
+      toast.success("Книга добавлена в избранное");
     }
   };
 

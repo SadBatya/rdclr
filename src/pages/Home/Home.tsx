@@ -12,6 +12,7 @@ import { Loading } from "@/shared/ui/Loading/Loading";
 import { Filter } from "@/shared/ui/Filter/Filter";
 import { useSelector } from "react-redux";
 import { type RootState } from "@/shared/store/store";
+import { ToastContainer } from "react-toastify";
 
 export default function Home() {
   const [searhValue, setSearchValue] = useState<string>("");
@@ -79,6 +80,7 @@ export default function Home() {
         {!debouncedValue &&
           books?.map((book) => <Book key={book.id} book={book} />)}
         {isLoading && <Loading />}
+        <ToastContainer position="bottom-right" />
       </div>
     </div>
   );
