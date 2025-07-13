@@ -36,8 +36,6 @@ export default function Home() {
     filter: filterValue,
   });
 
-  console.log(filterValue, "filter value");
-
   const handleScroll = () => {
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 300 &&
@@ -63,9 +61,11 @@ export default function Home() {
       />
       <Filter />
       <div className={style.list}>
-        {bookByName?.items?.length === 0 && (
-          <p className={style.message}>Ничего не найдено :(</p>
-        )}
+        {bookByName &&
+          debouncedValue &&
+          bookByName?.items?.length === undefined && (
+            <p className={style.message}>Ничего не найдено :(</p>
+          )}
         {isError && (
           <p className={style.message}>
             Ошибка :(
@@ -73,9 +73,11 @@ export default function Home() {
             Попробуйте обновить страницу
           </p>
         )}
-        {bookByName && bookByName?.items?.length > 0
-          ? bookByName?.items?.map((book) => <Book key={book.id} book={book} />)
-          : books?.map((book) => <Book key={book.id} book={book} />)}
+        {bookByName &&
+          bookByName?.items?.length > 0 &&
+          bookByName?.items?.map((book) => <Book key={book.id} book={book} />)}
+        {!debouncedValue &&
+          books?.map((book) => <Book key={book.id} book={book} />)}
         {isLoading && <Loading />}
       </div>
     </div>
